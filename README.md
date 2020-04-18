@@ -8,10 +8,14 @@ EXT:echarts allows you to use [ECharts](https://echarts.apache.org/) in your ext
 You can load the library in your Fluid template with **LoadViewHelper**.
 
 	<echarts:load />
+	
+And enable the ECharts extensions.
 
-You can also load your own library.
+    <echarts:load bmap='true' dataTool='true' />
 
-    <echarts:load js="..." />
+You can also load your own library or extensions.
+
+    <echarts:load bmap='true' js="..." extensions="{bmap: '...'}" />
     
 Or, load the JS before the &lt;BODY&gt; tag.
 
