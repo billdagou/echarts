@@ -14,12 +14,19 @@ abstract class AbstractCDN implements CDN, SingletonInterface {
      * @param string|NULL $js
      * @param bool $footer
      * @param string|NULL $language
+     * @param array $extensions
      */
-    public function load(string $js = NULL, bool $footer = TRUE, string $language = NULL) {
+    public function load(string $js = NULL, bool $footer = TRUE, string $language = NULL, array $extensions = []) {
         $js = $this->renderJs($js, $language);
 
         if ($footer) {
             $this->getPageRenderer()->addJsFooterLibrary('echarts', $js);
+
+            foreach ($extensions as $extension => $data) {
+                $extensionJs = $this->renderExtensionJs($extension, $data, $language);
+
+                $this->getPageRenderer()->addJsFooterLibrary('echarts-'.$extension, $extensionJs);
+            }
         } else {
             $this->getPageRenderer()->addJsLibrary('echarts', $js);
         }
@@ -40,7 +47,7 @@ abstract class AbstractCDN implements CDN, SingletonInterface {
      *
      * @return string
      */
-    protected function getBuild(string $language = NULL) {
+    protected function getBuild(string $language = NULL): string {
         switch ($this->getExtConf('build')) {
             case 'common':
                 return 'echarts'.($language ? '-'.$language : '').'.common.min.js';
@@ -49,5 +56,26 @@ abstract class AbstractCDN implements CDN, SingletonInterface {
             case 'simple':
                 return 'echarts'.($language ? '-'.$language : '').'.simple.min.js';
         }
+    }
+
+    /**
+     * @param string $extension
+     * @param string $data
+     * @param string|NULL $language
+     *
+     * @return string
+     */
+    protected function renderExtensionJs(string $extension, string $data, string $language = NULL): string {
+        return static::URL.'extension/'.$this->getExtension($extension, $language);
+    }
+
+    /**
+     * @param string $extension
+     * @param string|NULL $language
+     *
+     * @return string
+     */
+    protected function getExtension(string $extension, string $language = NULL): string {
+        return $extension.'.min.js';
     }
 }

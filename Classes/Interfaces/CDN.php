@@ -8,6 +8,7 @@ interface CDN {
      * @param string|NULL $js
      * @param bool $footer
      * @param string|NULL $language
+     * @param array $extensions
      */
-    public function load(string $js = NULL, bool $footer = TRUE, string $language = NULL);
+    public function load(string $js = NULL, bool $footer = TRUE, string $language = NULL, array $extensions = []);
 }

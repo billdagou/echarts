@@ -15,12 +15,15 @@ class LoadViewHelper extends AbstractViewHelper {
         $this->registerArgument('footer', 'boolean', 'Add to footer or not.', FALSE, TRUE);
         $this->registerArgument('js', 'string', 'ECharts file path.');
         $this->registerArgument('language', 'string', 'Language code.');
+        $this->registerArgument('bmap', 'boolean', 'Enable bmap extension or not.', FALSE, FALSE);
+        $this->registerArgument('dataTool', 'boolean', 'Enable dataTool extension or not.', FALSE, FALSE);
+        $this->registerArgument('extensions', 'array', 'Extension file path.');
     }
 
     public function render() {
         $cdn = $this->getCDN((bool)$this->arguments['js']);
 
-        $cdn->load($this->arguments['js'], $this->arguments['footer'], $this->arguments['language']);
+        $cdn->load($this->arguments['js'], $this->arguments['footer'], $this->arguments['language'], $this->getExtensions());
     }
 
     /**
@@ -38,5 +41,22 @@ class LoadViewHelper extends AbstractViewHelper {
         } else {
             return GeneralUtility::makeInstance(Local::class);
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getExtensions(): array {
+        $extensions = [];
+
+        if ($this->arguments['bmap']) {
+            $extensions['bmap'] = $this->arguments['extensions']['bmap'] ?? 'bmap';
+        }
+
+        if ($this->arguments['dataTool']) {
+            $extensions['dataTool'] = $this->arguments['extensions']['dataTool'] ?? 'dataTool';
+        }
+
+        return $extensions;
     }
 }

@@ -15,4 +15,15 @@ class Customization extends AbstractCDN {
     protected function renderJs(string $js = NULL, string $language = NULL): string {
         return $this->getAssetPath($js);
     }
+
+    /**
+     * @param string $extension
+     * @param string $data
+     * @param string|NULL $language
+     *
+     * @return string
+     */
+    protected function renderExtensionJs(string $extension, string $data, string $language = NULL): string {
+        return $this->getAssetPath($data);
+    }
 }
