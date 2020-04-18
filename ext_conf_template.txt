@@ -1,0 +1,2 @@
+# cat=ECharts; type=options[Common=common,Simple=simple,Full=full]; label=Build
+build =
