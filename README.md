@@ -9,9 +9,13 @@ You can load the library in your Fluid template with **LoadViewHelper**.
 
 	<echarts:load />
 	
-And enable the ECharts extensions.
+Enable the ECharts extensions.
 
     <echarts:load bmap='true' dataTool='true' />
+    
+And use different language.
+
+    <echarts:load language="en" />    
 
 You can also load your own library or extensions.
 
