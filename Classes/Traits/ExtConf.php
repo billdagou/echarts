@@ -12,6 +12,6 @@ trait ExtConf {
      */
     protected function getExtConf(string $path): string {
         return GeneralUtility::makeInstance(ExtensionConfiguration::class)
-            ->get('jquery', $path);
+            ->get('echarts', $path);
     }
 }

@@ -29,6 +29,12 @@ abstract class AbstractCDN implements CDN, SingletonInterface {
             }
         } else {
             $this->getPageRenderer()->addJsLibrary('echarts', $js);
+
+            foreach ($extensions as $extension => $data) {
+                $extensionJs = $this->renderExtensionJs($extension, $data, $language);
+
+                $this->getPageRenderer()->addJsLibrary('echarts-'.$extension, $extensionJs);
+            }
         }
     }
 
