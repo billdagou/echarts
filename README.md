@@ -5,26 +5,26 @@ EXT:echarts allows you to use [ECharts](https://echarts.apache.org/) in your ext
 **The extension version only matches the ECharts library version, it doesn't mean anything else.**
 
 ## How to use it
-You can load the library in your Fluid template with **LoadViewHelper**.
+You can load the library in your Fluid template.
 
-	<echarts:load />
+	<echarts:js />
 	
-Enable the ECharts extensions.
+And the ECharts extensions.
 
-    <echarts:load bmap='true' dataTool='true' />
-    
-And use different language.
+    <echarts:extension extension="..." />
 
-    <echarts:load language="en" />    
+You can also load your own libraries.
 
-You can also load your own library or extensions.
+    <echarts:js src="..." />
+    <echarts:extension extension="..." src="..." />
 
-    <echarts:load bmap='true' js="..." extensions="{bmap: '...'}" />
-    
-Or, load the JS before the &lt;BODY&gt; tag.
+For more options please refer to &lt;f:asset.js&gt;.
 
-    <echarts:load footer="false" />
-    
-To use the CDN resource, please set `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['echarts']['CDN']` in `ext_localconf.php` or `AdditionalConfiguration.php`.
+To use other ECharts source, you can register it in `ext_localconf.php` or `AdditionalConfiguration.php`.
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['echarts']['CDN'] = \Dagou\Echarts\CDN\jsDelivr::class;
+    \Dagou\ECharts\Utility\ExtensionUtility::registerSource(\Dagou\ECharts\Source\JsDelivr::class);
+
+You may want to disable the other source and use the local one instead in some cases, for example saving page as PDF by [WKHtmlToPdf](https://wkhtmltopdf.org/).
+
+    <echarts:js disableSource="true" />
+    <echarts:extension extension="..." disableSource="true" />
