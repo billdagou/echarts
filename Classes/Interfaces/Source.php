@@ -2,7 +2,7 @@
 namespace Dagou\Echarts\Interfaces;
 
 interface Source {
-    const VERSION = '5.0.2';
+    const VERSION = '5.3.2';
 
     /**
      * @return string
