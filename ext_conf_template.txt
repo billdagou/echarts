@@ -1,2 +1,0 @@
-# cat=ECharts; type=options[Default=default,Common=common,Simple=simple,E.S.M=esm]; label=Build
-build =

@@ -2,14 +2,16 @@
 namespace Dagou\Echarts\Interfaces;
 
 interface Source {
-    const VERSION = '5.3.2';
-
     /**
+     * @param string $build
+     *
      * @return string
      */
-    public function getJs(): string;
+    public function getJs(string $build): string;
 
     /**
+     * @param string $extension
+     *
      * @return string
      */
     public function getExtension(string $extension): string;

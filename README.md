@@ -9,11 +9,15 @@ You can load the library in your Fluid template.
 
 	<echarts:js />
 	
-And the ECharts extensions.
+And the extensions.
 
     <echarts:extension extension="..." />
 
-You can also load your own libraries.
+You can also load other ECharts version, like `common`, `esm`, or `simple`.
+
+    <echarts:js build="..." />
+
+Or your own libraries.
 
     <echarts:js src="..." />
     <echarts:extension extension="..." src="..." />

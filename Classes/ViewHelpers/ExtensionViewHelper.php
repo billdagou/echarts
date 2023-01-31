@@ -8,11 +8,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Asset\ScriptViewHelper;
 
 class ExtensionViewHelper extends ScriptViewHelper {
+    protected static array $builds = [
+        'bmap',
+        'dataTool',
+    ];
+
     public function initializeArguments(): void {
         parent::initializeArguments();
 
         $this->registerArgument('extension', 'string', 'Extension name.', TRUE);
-        $this->registerArgument('disableSource', 'boolean', 'Disable Source.', FALSE, FALSE);
+        $this->registerArgument('disableSource', 'boolean', 'Disable Source.');
+
         $this->overrideArgument(
             'identifier',
             'string',
@@ -28,8 +34,7 @@ class ExtensionViewHelper extends ScriptViewHelper {
     public function render(): string {
         if (!$this->arguments['src']) {
             if (!$this->arguments['disableSource']
-                && ($className = ExtensionUtility::getSource())
-                && is_subclass_of($className, Source::class)
+                && is_subclass_of(($className = ExtensionUtility::getSource()), Source::class)
             ) {
                 $source = GeneralUtility::makeInstance($className);
             } else {

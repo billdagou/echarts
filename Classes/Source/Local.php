@@ -2,5 +2,5 @@
 namespace Dagou\Echarts\Source;
 
 class Local extends AbstractSource {
-    const URL = 'EXT:echarts/Resources/Public/';
+    protected const URL = 'EXT:echarts/Resources/Public/';
 }

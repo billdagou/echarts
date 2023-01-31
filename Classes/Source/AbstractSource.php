@@ -2,35 +2,28 @@
 namespace Dagou\Echarts\Source;
 
 use Dagou\Echarts\Interfaces\Source;
-use Dagou\Echarts\Traits\ExtConf;
 use TYPO3\CMS\Core\SingletonInterface;
 
 abstract class AbstractSource implements Source, SingletonInterface {
-    use ExtConf;
-
-    const URL = '';
+    protected const URL = '';
+    protected const VERSION = '5.3.2';
 
     /**
+     * @param string $build
+     *
      * @return string
      */
-    public function getJs(): string {
-        return static::URL.$this->getJsBuild();
+    public function getJs(string $build): string {
+        return static::URL.$this->getJsBuild($build);
     }
 
     /**
+     * @param string $buildName
+     *
      * @return string
      */
-    protected function getJsBuild(): string {
-        switch ($this->getExtConf('build')) {
-            case 'common':
-                return 'echarts.common.min.js';
-            case 'default':
-                return 'echarts.min.js';
-            case 'esm':
-                return 'echarts.esm.min.js';
-            case 'simple':
-                return 'echarts.simple.min.js';
-        }
+    protected function getJsBuild(string $buildName): string {
+        return 'echarts'.($buildName ? '.'.$buildName : '').'.min.js';
     }
 
     /**
