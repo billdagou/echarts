@@ -5,30 +5,24 @@ EXT:echarts allows you to use [ECharts](https://echarts.apache.org/) in your ext
 **The extension version only matches the ECharts library version, it doesn't mean anything else.**
 
 ## How to use it
-You can load the library in your Fluid template.
+You can load the library in your Fluid template easily.
 
-	<echarts:js />
+    <f:asset.script identifier="echarts" src="{echarts:uri.js()}" />
 	
 And the extensions.
 
-    <echarts:extension extension="..." />
+    <f:asset.script identifier="echarts.bmap" src="{echarts:uri.extension(extension: 'bmap')}" />
+    <f:asset.script identifier="echarts.dataTool" src="{echarts:uri.extension(extension: 'dataTool')}" />
 
 You can also load other ECharts version, like `common`, `esm`, or `simple`.
 
-    <echarts:js build="..." />
-
-Or your own libraries.
-
-    <echarts:js src="..." />
-    <echarts:extension extension="..." src="..." />
-
-For more options please refer to &lt;f:asset.js&gt;.
+    {echarts:uri.js(build: "...")}
 
 To use other ECharts source, you can register it in `ext_localconf.php` or `AdditionalConfiguration.php`.
 
     \Dagou\ECharts\Utility\ExtensionUtility::registerSource(\Dagou\ECharts\Source\JsDelivr::class);
 
-You may want to disable the other source and use the local one instead in some cases, for example saving page as PDF by [WKHtmlToPdf](https://wkhtmltopdf.org/).
+You may want to disable the source and use the local one instead in some cases, for example saving page as PDF by [WKHtmlToPdf](https://wkhtmltopdf.org/).
 
-    <echarts:js disableSource="true" />
-    <echarts:extension extension="..." disableSource="true" />
+    {echarts:uri.js(forceLocal: "true")}
+    {echarts:uri.extension(extension: "...", forceLocal: "true")}
